@@ -1,39 +1,72 @@
 <template>
-<div class="btns-container" v-bind:class="{fullscreen: !enable}">
-  <div class="btns" v-bind:class="{fullscreen: !enable}">
-    <button v-on:click="$emit('card-forward')">forward</button>
-    <button v-on:click="$emit('card-backward')">backword</button>
-    <button v-on:click="$emit('card-focus')">focus</button>
-    <button v-on:click="$emit('card-fullscreen')">fullscreen</button>
-    <button>commit</button>
+  <div class="btns-container" v-bind:class="{ fullscreen: !enable }">
+    <div class="btns" v-bind:class="{ fullscreen: !enable }">
+      <!-- <button v-on:click="$emit('card-forward')" class="material-symbols-rounded">keyboard_arrow_up</button>
+      <label for="">last</label> -->
+
+      <button v-on:click="$emit('card-backward')" class="material-symbols-rounded">vertical_align_bottom</button>
+      <label for="">head</label>
+
+      <button v-on:click="$emit('card-focus')" class="material-symbols-rounded">inbox</button>
+      <label for="">focus</label>
+
+      <button v-on:click="$emit('card-fullscreen')" class="material-symbols-rounded">cancel</button>
+      <label for="">close</label>
+
+      <!-- <button>commit</button> -->
+    </div>
   </div>
-</div>
 </template>
 
-<style>
+<style scoped>
+button{
+  cursor: pointer;
+}
+
+button+label:not(:last-child){
+  margin-bottom: 24px;
+}
+
+button+label{
+  width: 50px;
+  text-align: center;
+  /* margin-top: -10px; */
+  font-size: 11px;
+}
 .btns button{
   padding: 8px;
-  color: black;
-  background: white;
-  max-width: 1000px;
-  border-radius: 100px;
+  color: white;
+  background-color: rgba(255,255,255,0.15) !important;
+  /* color:white; */
+  /* background-color: transparent; */
+  /* border: white 2pt solid; */
+
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
   text-align: center;
 
   border:none;
   outline:none;
+
+  transition: background 0.25s;
+}
+
+button:hover{
+  background-color: rgba(255,255,255,0.35) !important;
 }
 
 .btns-container{
+  --width: 120px;
+
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 
-  margin-left: -32px;
-  padding-left: 32px;
-  margin-right: -32px;
   transition: all 0.35s;
 
-  width: 132px;
+  width: 60px;
   max-width: 1000px;
 
   overflow-x: hidden;
@@ -41,17 +74,18 @@
 
 .btns-container.fullscreen{
   width: 0;
-  /* padding:0px !important; */
-  /* margin: 0px !important; */
+  padding:0px !important;
+  margin-left: 0px !important;
+  margin: 0px !important;
 }
 
 #finder-page .layout .btns{
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 16px;
+  gap: 4px;
   padding-bottom: 32px;
-  width: 100px;
+  width: var(--width);
   min-width: 100px;
 }
 
