@@ -1,5 +1,4 @@
-const html = (e)=>e.join("").trim();
-const template = html`
+<template>
 <div id="finder-files">
   <div class="title">
     commit: 432ab0
@@ -11,13 +10,14 @@ const template = html`
     </div>
   </div>
 </div>
-`;
+</template>
 
+<script>
 export default {
   data() {
     return {
       files: ["README.md", ".gitignore"]
     };
   },
-  template
 };
+</script>
