@@ -9,27 +9,22 @@ const template = html`
 
   <div class="layout">
     <div id="left">
-      <div class="stage">
+      <div class="stage" v-bind:class="{close: !stageEnable}">
         <div id="left">
           <div>Unstage</div>
         </div>
         <div id="right"></div>
       </div>
-      <div class="cards">
-        <div v-on:click="moveCard" style="--m:3; --ma:2; --o: 0; --oa: 0.5;" class="card" v-bind:class="{move: animatedForward, moved:animatedBackword==1, 'before-moved': animatedBackword==2, 'focus': forceFocus, 'unfocus': forceUnfocus}"></div>
-        <div v-on:click="moveCard" style="--m:2; --ma:1; --o: 0.5; --oa: 0.5;" class="card" v-bind:class="{move: animatedForward, moved:animatedBackword==1, 'before-moved': animatedBackword==2, 'focus': forceFocus, 'unfocus': forceUnfocus}"></div>
-        <div v-on:click="moveCard" style="--m:1; --ma:0; --o: 0.5; --oa:1;" class="card" v-bind:class="{move: animatedForward, moved:animatedBackword==1, 'before-moved': animatedBackword==2, 'focus': forceFocus, 'unfocus': forceUnfocus}"></div>
-        <div style="--m:0; --ma:-1; --o: 1; --oa: 0;" class="card" v-bind:class="{move: animatedForward, moved:animatedBackword==1, 'before-moved': animatedBackword==2, 'focus': forceFocus, 'unfocus': forceUnfocus}">
-          <finder-files></finder-files>
-        </div>
-      </div>
+      <folder-card v-bind:focus="cardFocus" ref="fcard"></folder-card>
     </div>
-    <div class="btns">
-      <button v-on:click="moveCard">forward</button>
-      <button v-on:click="moveCardBackward">backword</button>
-      <button v-on:click="focusCard">focus</button>
-      <button>commit</button>
-      <button>commit</button>
+    <div class="btns-container" v-bind:class="{fullscreen: !enableGit}">
+      <div class="btns" v-bind:class="{fullscreen: !enableGit}">
+        <button v-on:click="moveCard">forward</button>
+        <button v-on:click="moveCardBackward">backword</button>
+        <button v-on:click="focusCard">focus</button>
+        <button v-on:click="fullscreenCard">fullscreen</button>
+        <button>commit</button>
+      </div>
     </div>
   </div>
 </div>
@@ -40,37 +35,32 @@ export default {
     return {
       animatedForward: false,
       animatedBackword: 0,
-      forceFocus: false,
-      forceUnfocus: false
+      cardFocus: false,
+      enableGit: true,
+      stageEnable: true
+
+      // forceFocus: false,
+      // forceUnfocus: false,
+      // cardFullscreen: false
     };
   },
   methods:{
     async moveCard(){
-      if(this.animatedBackword != 0 || this.animatedForward) return;
-
-      this.animatedForward = true;
-      await new Promise(e=>setTimeout(e, 450));
-      this.animatedForward = false;
+      this.$refs.fcard.forward();
     },
 
     async moveCardBackward(){
-      if(this.animatedBackword != 0 || this.animatedForward) return;
-
-      this.animatedBackword = 1;
-      await new Promise(e=>setTimeout(e, 100));
-      this.animatedBackword = 2;
-      await new Promise(e=>setTimeout(e, 450));
-      this.animatedBackword = 0;
+      this.$refs.fcard.backward();
     },
     async focusCard(){
-      this.forceFocus = !this.forceFocus;
-      console.log("focus");
+      this.cardFocus = !this.cardFocus;
+    },
+    async fullscreenCard(){
+      this.stageEnable = false;
+      this.cardFocus = true;
+      await new Promise(e => setTimeout(e, 250));
+      this.enableGit = false;
 
-      if(!this.forceFocus){
-        this.forceUnfocus = true;
-        await new Promise(e => setTimeout(e, 450));
-        this.forceUnfocus = false;
-      }
     }
   },
   template
