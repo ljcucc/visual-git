@@ -8,7 +8,7 @@
   'opsz' 48
 }
 
-:root,button{
+:root,button,input[type=text]{
   font-family: 'Roboto Mono', monospace;
   font-size: 14px;
   

@@ -1,5 +1,5 @@
 <template>
-  <div id="sidebar">
+  <div id="sidebar" v-on:wheel="onWheel">
     <button v-on:click="$emit('update:index', 0);index = 0" v-bind:class="{sel: index==0}" class="material-symbols-rounded">home</button>
     <label for="">projects</label>
 
@@ -8,6 +8,9 @@
 
     <button v-on:click="$emit('update:index', 2);index = 2" v-bind:class="{sel: index==2}" class="material-symbols-rounded">code</button>
     <label for="">editor</label>
+
+    <button v-on:click="$emit('update:index', 3);index = 3" v-bind:class="{sel: index==3}" class="material-symbols-rounded">grid_view</button>
+    <label for="">sandbox</label>
 
     <div style="flex: 1;"></div>
 
@@ -22,7 +25,7 @@
 }
 
 #sidebar{
-  padding: 24px 0px 0px 24px;
+  padding: 24px 0px 16px 24px;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -61,13 +64,36 @@ button:hover{
 
 <script>
 export default {
+  props: ['maxIndex'],
   emits: ['update:index'],
-  data(){
+  data() {
     return {
-      index: 0
+      index: 0,
+      scrolling: false
     };
   },
-  methods:{
+  methods: {
+    async onWheel(e) {
+      e.preventDefault();
+      console.log(e);
+
+      if (this.scrolling) return;
+      if (e.deltaY < -50) {
+        this.index--;
+      }
+      else if(e.deltaY > 50){
+        this.index++;
+      }else return;
+      this.scrolling = true;
+
+      if (this.index < 0) this.index = 0;
+      else if(this.index > this.maxIndex) this.index = this.maxIndex;
+      console.log("scroll!", this.index);
+      this.$emit('update:index', this.index)
+
+      await new Promise(e=>setTimeout(e,500));
+      this.scrolling = false;
+    }
   }
 };
 </script>

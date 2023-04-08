@@ -1,21 +1,20 @@
 <template>
-  <div class="btns-container" v-bind:class="{ fullscreen: !enable }">
-    <div class="btns" v-bind:class="{ fullscreen: !enable }">
-      <!-- <button v-on:click="$emit('card-forward')" class="material-symbols-rounded">keyboard_arrow_up</button>
-      <label for="">last</label> -->
+  <Transition name="git">
+    <div v-if="enable" class="btns-container">
+      <div class="btns">
 
-      <button v-on:click="$emit('card-backward')" class="material-symbols-rounded">vertical_align_bottom</button>
-      <label for="">head</label>
+        <button v-on:click="$emit('card-backward')" class="material-symbols-rounded">vertical_align_bottom</button>
+        <label for="">head</label>
 
-      <button v-on:click="$emit('card-focus')" class="material-symbols-rounded">inbox</button>
-      <label for="">focus</label>
+        <button v-on:click="$emit('card-focus')" class="material-symbols-rounded">inbox</button>
+        <label for="">focus</label>
 
-      <button v-on:click="$emit('card-fullscreen')" class="material-symbols-rounded">cancel</button>
-      <label for="">close</label>
+        <button v-on:click="$emit('card-fullscreen')" class="material-symbols-rounded">cancel</button>
+        <label for="">close</label>
 
-      <!-- <button>commit</button> -->
+      </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <style scoped>
@@ -56,7 +55,7 @@ button:hover{
   background-color: rgba(255,255,255,0.35) !important;
 }
 
-.btns-container{
+.btns-container,.git-enter-to{
   --width: 120px;
 
   height: 100%;
@@ -72,14 +71,15 @@ button:hover{
   overflow-x: hidden;
 }
 
-.btns-container.fullscreen{
+/* .btns-container.fullscreen, */
+.git-enter-from,.git-leave-to{
   width: 0;
   padding:0px !important;
   margin-left: 0px !important;
   margin: 0px !important;
 }
 
-#finder-page .layout .btns{
+.git-enter-to .btns,.btns{
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -89,16 +89,11 @@ button:hover{
   min-width: 100px;
 }
 
-.btns.fullscreen{
+.git-leave-to .btns, .git-enter-from .btns{
   box-sizing: border-box;
   overflow-x: hidden;
   width: 0px !important;
-  /* margin-right: -132px; */
   transition: all 0.35s;
-  /* transition: margin 0.35s; */
-  /* transform-style: preserve-3d;
-  transform: perspective(1500px) rotateY(90deg);
-  transition-timing-function: ease-in-out; */
 }
 </style>
 

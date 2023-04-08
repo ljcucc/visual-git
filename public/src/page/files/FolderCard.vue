@@ -13,7 +13,6 @@
 .card{
   background-color: white;
   border-radius: 14px 14px 0 0;
-  /* border-radius: 14px; */
   /* height: 100%; */
 
   opacity: var(--o);
@@ -23,6 +22,9 @@
   bottom: 0;
   left: 0;
   right: 0;
+
+  border-radius: 14px;
+  bottom: 32px;
 
   /* transition-timing-function: ease-in-out !important; */
 }
