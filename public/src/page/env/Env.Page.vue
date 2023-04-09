@@ -1,7 +1,9 @@
 <template>
   <div id="env">
     <ProjectTitle style="margin-bottom: 16px;" title="Sandbox" subtitle="virtual environment that will run inside browser."></ProjectTitle>
-    <div class="output">Waiting to boot WebContainer...</div>
+    <div class="output">
+      <div v-for="log in logs">{{ log }}</div>
+    </div>
     <input type="text" class="cmd">
   </div>
 </template>
@@ -22,6 +24,13 @@
   overflow-x:hidden;
   overflow-y: auto;
   padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.output>*{
+  height: 1.5rem;
 }
 
 .cmd{
@@ -40,11 +49,34 @@
 </style>
 
 <script>
+import { WebContainer } from '@webcontainer/api';
 import ProjectTitle from '../../components/ProjectTitle.vue';
+import { files } from './Sandbox';
 
 export default {
+  async created(){
+    const {print} = this;
+
+    print("booting...");
+    this.sandbox = await WebContainer.boot();
+    print("mounting files...");
+    await this.sandbox.mount(files);
+
+    print("");
+    print("done.");
+  },
+  methods:{
+    print(msg){
+      this.logs.push(msg || " ");
+    }
+  },
   data() {
-    return {};
+    return {
+      sandbox: null,
+      logs: [
+        "Waiting for sandbox boot..."
+      ]
+    };
   },
   components: { ProjectTitle }
 }

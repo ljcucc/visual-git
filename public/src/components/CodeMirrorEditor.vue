@@ -5,8 +5,8 @@
 <style>
 .codemirror,
 .cm-editor {
-  /* background: #242750; */
-  background: rgba(0, 0, 0, 0.35);
+  /* background: #46515c; */
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .codemirror * {
@@ -19,13 +19,20 @@
   height: 100% !important;
 }
 
+.cm-gutterElement{
+  color: rgba(255,255,255,0.25);
+}
+
 .cm-gutters {
+  padding-left: 6px;
   background:linear-gradient(0deg, rgba(255, 255, 255, 0.0) -10%, rgba(255, 255, 255, 0.15) 200%) !important;
   /* background-color: rgba(255, 255, 255, 0.05) !important; */
 }
 
 .cm-activeLineGutter {
-  background-color: rgba(255, 255, 255, 0.15) !important;
+  /* background-color: rgba(255, 255, 255, 0.15) !important; */
+  background-color: rgba(255, 255, 255, 0) !important;
+  color: white;
 }
 
 .cm-cursorLayer {

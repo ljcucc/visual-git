@@ -12,6 +12,9 @@
     <button v-on:click="$emit('update:index', 3);index = 3" v-bind:class="{sel: index==3}" class="material-symbols-rounded">grid_view</button>
     <label for="">sandbox</label>
 
+    <!-- <button v-on:click="" class="material-symbols-rounded">grid_view</button>
+    <label for="">tools</label> -->
+
     <div style="flex: 1;"></div>
 
     <button v-on:click="$emit('open-git')" class="material-symbols-rounded">settings</button>

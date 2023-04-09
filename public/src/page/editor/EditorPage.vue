@@ -1,14 +1,12 @@
 <template>
   <div id="editor">
-    <TabsBar>
+    <!-- <TabsBar>
       <ToolBtns></ToolBtns>
-    </TabsBar>
+    </TabsBar> -->
+    <ProjectTitle title="Editor" subtitle="code editor"></ProjectTitle>
     <div class="row">
-      <div class="codemirror-container">
-        <div class="codemirror">
-          <CodeMirrorEditor></CodeMirrorEditor>
-        </div>
-      </div>
+      <TabsList></TabsList>
+      <CodeEditorWidget></CodeEditorWidget>
     </div>
   </div>
 </template>
@@ -23,53 +21,35 @@
 
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 32px;
 
   position:relative;
 }
 
-.row{
+/* .row{
   display: flex;
   flex-direction: row;
   gap: 16px;
-}
-
+} */
 
 .row {
   overflow: hidden;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  gap: 32px;
+  /* gap: 32px; */
+  gap: 12px;
   flex: 1;
 }
 
-.codemirror-container {
-  overflow: hidden;
-  box-sizing: border-box;
-  border-radius: 8px 8px 14px 14px;
-  /* border-radius: 14px; */
-  flex: 1;
-}
 
-.codemirror {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-}
-
-wc-codemirror {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 100%;
-}
 </style>
 
 <script>
-import CodeMirrorEditor from '../../components/CodeMirrorEditor.vue';
 import ProjectTitle from '../../components/ProjectTitle.vue';
+import CodeEditorWidget from './CodeEditorWidget.vue';
 import TabsBar from './TabsBar.vue';
+import TabsList from './TabsList.vue';
 import ToolBtns from './ToolBtns.vue';
 
 export default {
@@ -83,10 +63,11 @@ export default {
     console.log(this.$refs.cm.editor.options.theme)
   },
   components: {
-    CodeMirrorEditor,
     ToolBtns,
     ProjectTitle,
-    TabsBar
+    TabsBar,
+    CodeEditorWidget,
+    TabsList
 }
 }
 </script>

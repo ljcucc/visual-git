@@ -3,15 +3,15 @@
   <div v-on:click="forward" style="--m:3; --ma:2; --o: 0; --oa: 0.5;" class="card" v-bind:class="{move: animatedForward, moved:animatedBackword==1, 'before-moved': animatedBackword==2, 'focus': forceFocus, 'unfocus': forceUnfocus}"></div>
   <div v-on:click="forward" style="--m:2; --ma:1; --o: 0.5; --oa: 0.5;" class="card" v-bind:class="{move: animatedForward, moved:animatedBackword==1, 'before-moved': animatedBackword==2, 'focus': forceFocus, 'unfocus': forceUnfocus}"></div>
   <div v-on:click="forward" style="--m:1; --ma:0; --o: 0.5; --oa:1;" class="card" v-bind:class="{move: animatedForward, moved:animatedBackword==1, 'before-moved': animatedBackword==2, 'focus': forceFocus, 'unfocus': forceUnfocus}"></div>
-  <div style="--m:0; --ma:-1; --o: 1; --oa: 0;" class="card" v-bind:class="{move: animatedForward, moved:animatedBackword==1, 'before-moved': animatedBackword==2, 'focus': forceFocus, 'unfocus': forceUnfocus, fullscreen: cardFullscreen}">
-    <FinderFiles></FinderFiles>
+  <div style="--m:0; --ma:-1; --o: 1; --oa: 0;" class="card" v-bind:class="{move: animatedForward, moved:animatedBackword==1, 'before-moved': animatedBackword==2, 'focus': forceFocus, 'unfocus': forceUnfocus}">
+    <slot></slot>
   </div>
 </div>
 </template>
 
 <style scoped>
 .card{
-  background-color: white;
+  background-color: var(--card-bg, white);
   border-radius: 14px 14px 0 0;
   /* height: 100%; */
 

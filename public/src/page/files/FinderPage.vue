@@ -17,7 +17,9 @@
 
         <!-- <TabsBar></TabsBar> -->
 
-        <FolderCard v-on:wheel="onCardWheel" v-bind:focus="cardFocus" ref="fcard" />
+        <FolderCard v-on:wheel="onCardWheel" v-bind:focus="cardFocus" ref="fcard">
+          <FinderFiles></FinderFiles>
+        </FolderCard>
       </div>
 
       <GitSideBtns v-on:wheel="onWheel" v-bind:enable="enableGit" v-on:card-fullscreen="fullscreenCard"
@@ -102,6 +104,7 @@ import GitSideBtns from "./GitSideBtns.vue";
 import GitBtns from "./GitBtn.vue";
 import ProjectTitle from "../../components/ProjectTitle.vue";
 import TabsBar from "../editor/TabsBar.vue";
+import FinderFiles from "./FinderFiles.vue";
 
 export default {
   data() {
@@ -171,6 +174,6 @@ export default {
       this.enableGit = false;
     }
   },
-  components: { FolderCard, GitSideBtns, GitBtns, ProjectTitle, TabsBar }
+  components: { FolderCard, GitSideBtns, GitBtns, ProjectTitle, TabsBar, FinderFiles }
 };
 </script>
