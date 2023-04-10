@@ -3,13 +3,19 @@
     <div v-if="enable" class="btns-container">
       <div class="btns">
 
-        <button v-on:click="$emit('card-backward')" class="material-symbols-rounded">vertical_align_bottom</button>
+        <button v-on:click="$emit('card-backward')" class="material-symbols-rounded">
+          <img src="../../../icons/vertical_align_bottom_white_24dp.svg" alt="" srcset="">
+        </button>
         <label for="">head</label>
 
-        <button v-on:click="$emit('card-focus')" class="material-symbols-rounded">inbox</button>
+        <button v-on:click="$emit('card-focus')" class="material-symbols-rounded">
+          <img src="../../../icons/inbox_white_24dp.svg" alt="" srcset="">
+        </button>
         <label for="">focus</label>
 
-        <button v-on:click="$emit('card-fullscreen')" class="material-symbols-rounded">cancel</button>
+        <button v-on:click="$emit('card-fullscreen')" class="material-symbols-rounded">
+          <img src="../../../icons/cancel_white_24dp.svg" alt="" srcset="">
+        </button>
         <label for="">close</label>
 
       </div>

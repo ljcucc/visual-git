@@ -15,7 +15,8 @@ const customHeader = {
 // https://vitejs.dev/config/
 export default defineConfig({
   server:{
-    host: true
+    host: true,
+    port: 3001
   },
   root: __dirname + '/public',
   build:{

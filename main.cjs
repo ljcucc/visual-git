@@ -6,9 +6,16 @@ const createWindow = () => {
     minHeight: 600,
     width: 1000,
     height: 800,
+    // icon: __dirname+'/assets/icon_5x.png'
   });
 
-  win.loadFile('./public/index.html');
+  console.log(__dirname+'/assets/icon_5x.png')
+
+  if (app.isPackaged) {
+    win.loadFile(join(__dirname, './dist/index.html'))
+  } else {
+    win.loadURL('http://localhost:3001')
+  }
 };
 
 app.whenReady().then(() => {

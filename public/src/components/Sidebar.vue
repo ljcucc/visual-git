@@ -1,16 +1,28 @@
 <template>
   <div id="sidebar" v-on:wheel="onWheel">
-    <button v-on:click="$emit('update:index', 0);index = 0" v-bind:class="{sel: index==0}" class="material-symbols-rounded">home</button>
+    <button v-on:click="$emit('update:index', 0); index = 0" v-bind:class="{ sel: index == 0 }"
+      class="material-symbols-rounded">
+      <img src="../../icons/home_white_24dp.svg" alt="" srcset="">
+    </button>
     <label for="">projects</label>
 
-    <button v-on:click="$emit('update:index', 1);index = 1" v-bind:class="{sel: index==1}" class="material-symbols-rounded">folder</button>
+    <button v-on:click="$emit('update:index', 1); index = 1" v-bind:class="{ sel: index == 1 }"
+      class="material-symbols-rounded">
+      <img src="../../icons/folder_white_24dp.svg" alt="" srcset="">
+    </button>
     <label for="">files</label>
 
-    <button v-on:click="$emit('update:index', 2);index = 2" v-bind:class="{sel: index==2}" class="material-symbols-rounded">code</button>
+    <button v-on:click="$emit('update:index', 2); index = 2" v-bind:class="{ sel: index == 2 }"
+      class="material-symbols-rounded">
+      <img src="../../icons/code_white_24dp.svg" alt="" srcset="">
+    </button>
     <label for="">editor</label>
 
-    <button v-on:click="$emit('update:index', 3);index = 3" v-bind:class="{sel: index==3}" class="material-symbols-rounded">grid_view</button>
-    <label for="">sandbox</label>
+    <button v-on:click="$emit('update:index', 3); index = 3" v-bind:class="{ sel: index == 3 }"
+      class="material-symbols-rounded">
+      <img src="../../icons/dashboard_white_24dp.svg" alt="" srcset="">
+    </button>
+    <label for="">console</label>
 
     <!-- <button v-on:click="" class="material-symbols-rounded">grid_view</button>
     <label for="">tools</label> -->
@@ -22,29 +34,36 @@
   </div>
 </template>
 
-<style scoped>
-.sel,.sel:hover{
-  background-color: rgba(255,255,255,0.35) !important;
+<style lang="scss" scoped>
+.sel,
+.sel:hover {
+  background-color: rgba(255, 255, 255, 0.35) !important;
 }
 
-#sidebar{
+#sidebar {
   padding: 24px 0px 16px 24px;
   align-items: center;
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  * {
+    transition-timing-function: ease-in-out !important;
+  }
 }
-button+label{
+
+button+label {
   width: 50px;
   text-align: center;
   font-size: 11px;
   margin-bottom: 16px;
 }
-button{
+
+button {
   cursor: pointer;
   padding: 8px;
   color: white;
-  background-color: rgba(255,255,255,0.05) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
   /* color:white; */
   /* background-color: transparent; */
   /* border: white 2pt solid; */
@@ -54,14 +73,14 @@ button{
   border-radius: 100%;
   text-align: center;
 
-  border:none;
-  outline:none;
+  border: none;
+  outline: none;
 
   transition: background 0.25s;
 }
 
-button:hover{
-  background-color: rgba(255,255,255,0.15) !important;
+button:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
 }
 </style>
 
@@ -84,17 +103,17 @@ export default {
       if (e.deltaY < -50) {
         this.index--;
       }
-      else if(e.deltaY > 50){
+      else if (e.deltaY > 50) {
         this.index++;
-      }else return;
+      } else return;
       this.scrolling = true;
 
       if (this.index < 0) this.index = 0;
-      else if(this.index > this.maxIndex) this.index = this.maxIndex;
+      else if (this.index > this.maxIndex) this.index = this.maxIndex;
       console.log("scroll!", this.index);
       this.$emit('update:index', this.index)
 
-      await new Promise(e=>setTimeout(e,500));
+      await new Promise(e => setTimeout(e, 500));
       this.scrolling = false;
     }
   }

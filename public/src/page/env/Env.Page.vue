@@ -2,23 +2,14 @@
   <div id="env">
     <ProjectTitle style="margin-bottom: 16px;" title="Console" subtitle="Virtual environment will run inside browser">
     </ProjectTitle>
-    <div class="row">
-
-      <!-- <div class="col">
-        <div class="output">
-          <div v-for="log in logs">{{ log }}</div>
-        </div>
-        <input type="text" class="cmd">
-      </div> -->
-      <div class="output" ref="terminal">
-      </div>
+    <div class="output">
+      <div v-for="log in logs">{{ log }}</div>
     </div>
+    <input type="text" class="cmd">
   </div>
 </template>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
 
 <style lang="scss" scoped>
 #env {
@@ -54,6 +45,7 @@
 
   display: flex;
   flex-direction: column;
+  overflow: auto;
 
   &::-webkit-scrollbar-track {
     /* background: transparent;  */
@@ -74,7 +66,7 @@
 
 
 .row {
-  height: calc( 80% - 32px );
+  height: calc(80% - 32px);
   flex: 1;
   display: flex;
   flex-direction: row;
@@ -109,9 +101,6 @@
 import { WebContainer } from '@webcontainer/api';
 import ProjectTitle from '../../components/ProjectTitle.vue';
 import { files } from './Sandbox';
-import { Terminal } from 'xterm';
-import { FitAddon } from 'xterm-addon-fit';
-import 'xterm/css/xterm.css';
 
 export default {
   async created() {
@@ -124,34 +113,13 @@ export default {
     print("");
     for (var i = 0; i < 100; i++)
       print("done.");
-    this.initTerminal();
   },
   async mounted() {
-    if (this.$sandbox.temrinal)
-      this.initTerminal();
   },
   methods: {
     print(msg) {
       this.logs.push(msg || " ");
     },
-    async initTerminal() {
-
-      this.terminal = new Terminal({
-        convertEol: true
-      });
-
-      const fitAddon = new FitAddon();
-      this.terminal.loadAddon(fitAddon);
-
-      this.terminal.open(this.$refs.terminal);
-      fitAddon.fit();
-      await startShell(this.terminal, this.$sandbox.container);
-
-      const exitCode = await installDependencies(this.terminal, this.$sandbox.container);
-      if (exitCode !== 0) {
-        throw new Error('Installation failed');
-      };
-    }
   },
   data() {
     return {

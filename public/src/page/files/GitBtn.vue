@@ -1,6 +1,8 @@
 <template>
   <div class="git-btn">
-    <button v-on:click="$emit('open-git')" class="material-symbols-rounded">fork_left</button>
+    <button v-on:click="$emit('open-git')" class="material-symbols-rounded">
+      <img src="../../../icons/fork_left_white_24dp.svg" alt="" srcset="">
+    </button>
     <label for="">git</label>
   </div>
 </template>
