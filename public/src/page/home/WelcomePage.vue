@@ -15,7 +15,7 @@
 <style scoped>
 #welcome{
   padding: 32px;
-  height: 100vh;
+  height: 100%;
   box-sizing: border-box;
 
   display: flex;

@@ -1,7 +1,7 @@
 <template>
   <div class="btn">
     <button v-on:click="$emit('open-git')" class="material-symbols-rounded">construction</button>
-    <!-- <label for="">tools</label> -->
+    <label for="">tools</label>
   </div>
 </template>
 
@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: -8px;
+  margin-top: -12px;
 }
 
 button+label{

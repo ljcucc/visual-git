@@ -3,12 +3,14 @@
     <!-- <TabsBar>
       <ToolBtns></ToolBtns>
     </TabsBar> -->
-    <div class="rbar">
+    <div class="bar">
       <ProjectTitle class="title" title="Editor" subtitle="code editor"></ProjectTitle>
+      <ToolBtns></ToolBtns>
     </div>
     <div class="row">
       <TabsList @select="onTabSel"></TabsList>
-        <CodeEditorWidget class="code-mirror"></CodeEditorWidget>
+      <CodeEditorWidget class="code-mirror"></CodeEditorWidget>
+      <ToolsSideBar></ToolsSideBar>        
       <!-- <FolderCard ref="fc" class="folder-card" v-bind:focus="showFC">
       </FolderCard> -->
     </div>
@@ -18,12 +20,13 @@
 <style scoped>
 .folder-card {
   /* --card-bg: #424242; */
-  --card-bg:  #657484;
+  --card-bg: #657484;
   margin-top: -16px;
 }
 
-.code-mirror{
-  background:  rgba(0,0,0, 0.05);
+.code-mirror {
+  /* background:  rgba(0,0,0, 0.05); */
+  background: rgba(255, 255, 255, 1);
 }
 
 #editor {
@@ -56,29 +59,29 @@
   flex: 1;
 }
 
-.bar{
+.bar {
   display: flex;
   flex-direction: row;
   gap: 12px;
-  flex: 1; 
 }
 
-.title{
-  flex:1;
+.title {
+  flex: 1;
 }
 </style>
 
 <script>
 import ProjectTitle from '../../components/ProjectTitle.vue';
 import FolderCard from '../files/FolderCard.vue';
-import CodeEditorWidget from './CodeEditorWidget.vue';
+import CodeEditorWidget from './CodeEditor.Widget.vue';
 import TabsBar from './TabsBar.vue';
 import TabsList from './TabsList.vue';
 import ToolBtns from './ToolBtns.vue';
+import ToolsSideBar from './ToolsSideBar.vue';
 
 export default {
   data() {
-    return { 
+    return {
       showFC: true
     };
   },
@@ -101,7 +104,8 @@ export default {
     TabsBar,
     CodeEditorWidget,
     TabsList,
-    FolderCard
-  }
+    FolderCard,
+    ToolsSideBar
+}
 }
 </script>

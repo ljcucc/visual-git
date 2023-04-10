@@ -14,6 +14,9 @@ const customHeader = {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server:{
+    host: true
+  },
   root: __dirname + '/public',
   build:{
     outDir:"../dist"

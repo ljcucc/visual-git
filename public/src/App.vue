@@ -1,17 +1,38 @@
 <template>
-  <div class="app-layout" :style="{'--bg':color}">
-    <Sidebar v-model:index="index" :max-index="3"></Sidebar>
-    <div id="pages">
-      <div class="page-switcher" v-bind:style="{ marginTop: index * 100 * -1 + 'vh' }"></div>
-      <WelcomePage></WelcomePage>
-      <FinderPage></FinderPage>
-      <EditorPageBeta></EditorPageBeta>
-      <EnvPage></EnvPage>
+  <KeyboardShortcut 
+  @digit1="index=0"
+  @digit2="index=1"
+  @digit3="index=2"
+  @digit4="index=3"
+  >
+    <div class="app-layout" :style="{ '--bg': color }">
+      <Sidebar ref="sb" v-model:index="index" :max-index="3"></Sidebar>
+      <div id="pages">
+        <div class="page-switcher" v-bind:style="{ marginTop: index * 100 * -1 + 'vh' }"></div>
+        <WelcomePage></WelcomePage>
+        <FinderPage ></FinderPage>
+        <EditorPage></EditorPage>
+        <EnvPage></EnvPage>
+      </div>
     </div>
-  </div>
+  </KeyboardShortcut>
 </template>
 
 <style scoped>
+
+/* .v-enter-active, .v-leave-active{
+  transition: all 0.35s;
+  overflow: hidden;
+}
+
+.v-enter-from{
+  height: 0;
+}
+
+.v-enter-to{
+  height: auto;
+} */
+
 .page-switcher {
   transition-timing-function: cubic-bezier(0, 1, 0, 1) !important;
   transition: margin 0.5s;
@@ -40,11 +61,11 @@
 <script>
 import Sidebar from './components/Sidebar.vue';
 
-import FinderPage from './page/files/FinderPage.vue';
+import FinderPage from './page/files/Files.Page.vue';
 import WelcomePage from './page/home/WelcomePage.vue';
-import EditorPage from './page/editor/EditorPage.vue';
+import EditorPage from './page/editor/Editor.Page.vue';
 import EnvPage from './page/env/Env.Page.vue';
-import EditorPageBeta from './page/editor/EditorPageBeta.vue';
+import KeyboardShortcut from './components/KeyboardShortcut.vue';
 
 
 export default {
@@ -54,11 +75,11 @@ export default {
       color: "auto"
     };
   },
-  mounted(){
+  mounted() {
     this.updateColor(0);
   },
-  methods:{
-    updateColor(newVal){
+  methods: {
+    updateColor(newVal) {
       console.log(newVal)
       switch (newVal) {
         case 0:
@@ -80,10 +101,10 @@ export default {
     }
   },
   watch: {
-    index(newVal, oldVal){
+    index(newVal, oldVal) {
       this.updateColor(newVal)
     }
   },
-  components: { FinderPage, Sidebar, WelcomePage, EditorPage, EnvPage, EditorPageBeta }
+  components: { FinderPage, Sidebar, WelcomePage, EditorPage, EnvPage, KeyboardShortcut }
 };
 </script>

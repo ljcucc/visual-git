@@ -1,12 +1,60 @@
 <template>
-  <div class="editor" ref="editor"></div>
+  <div class="editor light" ref="editor"></div>
 </template>
 
-<style>
+<style lang="scss">
 .codemirror,
 .cm-editor {
   /* background: #46515c; */
   background: rgba(0, 0, 0, 0.15);
+}
+
+.light {
+  color: rgba(0, 0, 0, .75);
+
+  .codemirror,
+  .cm-editor {
+    /* background: #46515c; */
+    background: rgba(255,255,255, 1);
+  }
+
+  .cm-gutterElement {
+    color: rgba(0, 0, 0, 0.35) !important;
+  }
+
+  .cm-activeLineGutter {
+    /* background-color: rgba(255, 255, 255, 0.15) !important; */
+    // background-color: rgba(255, 255, 255, 0) !important;
+    color: black !important;
+  }
+
+  .cm-gutters {
+    border: none !important;
+  }
+
+  .cm-cursor {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    border-left: 2px solid rgba(255, 255, 255, .35) !important;
+  }
+
+  .cm-cursor {
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.0);
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.0);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.0);
+  }
+
+  .cm-cursorLayer {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .cm-selectionBackground {
+    background-color: rgba(0, 0, 0, 0.15) !important;
+    background: rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
+.cm-gutterElement {
+  color: rgba(255, 255, 255, 0.25);
 }
 
 .codemirror * {
@@ -19,13 +67,10 @@
   height: 100% !important;
 }
 
-.cm-gutterElement{
-  color: rgba(255,255,255,0.25);
-}
 
 .cm-gutters {
   padding-left: 6px;
-  background:linear-gradient(0deg, rgba(255, 255, 255, 0.0) -10%, rgba(255, 255, 255, 0.15) 200%) !important;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.0) -10%, rgba(255, 255, 255, 0.15) 200%) !important;
   /* background-color: rgba(255, 255, 255, 0.05) !important; */
 }
 
@@ -54,7 +99,7 @@
   border-left: 2px solid rgba(255, 255, 255, .35) !important;
 }
 
-.cm-cursor{
+.cm-cursor {
   box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.8);
   -webkit-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.8);
   -moz-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.8);
@@ -74,7 +119,7 @@ export default {
   },
   mounted() {
     let theme = EditorView.theme({
-    }, { dark: true });
+    }, { dark: false });
     this.startState = EditorState.create({
       doc: "test",
       extensions: [
