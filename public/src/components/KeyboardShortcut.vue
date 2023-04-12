@@ -1,5 +1,5 @@
 <template>
-  <div style="outline:none;" tabindex="0" @keydown="onkey">
+  <div style="outline:none;box-sizing: border-box;height: 100%;" tabindex="0" @keydown="onkey">
     <slot></slot>
   </div>
 </template>

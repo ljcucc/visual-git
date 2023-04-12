@@ -8,6 +8,11 @@
     'opsz' 48
 }
 
+:root{
+  --full-height: 100vh;
+  /* --full-height: calc( 100vh - 30px); */
+}
+
 :root,
 button,
 input[type=text] {
@@ -81,4 +86,33 @@ body {
 .material-symbols-rounded img{
   width: 25px;
   height: 25px;
+}
+
+.window-draggable{
+  height: 30px;
+  -webkit-app-region: drag;
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+/* .window-draggable>button{
+  height: 12px;
+  width: 12px;
+  background-color: white;
+  border: none;
+  outline: none;
+  border-radius: 100%;
+} */
+
+#app{
+  box-sizing: border-box;
+  /* padding-top: 30px; */
+  /* height: calc(100vh - 30px); */
+  height: 100vh;
 }

@@ -14,6 +14,7 @@
   flex-direction: column;
   position: absolute;
   top: 24px;
+  /* top: 30px; */
   right: 32px;
   gap: 8px;
 }

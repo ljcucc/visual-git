@@ -1,13 +1,28 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, nativeTheme } = require('electron');
+const path = require("path");
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    minWidth: 800,
-    minHeight: 600,
+    minWidth: 900,
+    minHeight: 750,
     width: 1000,
     height: 800,
+    // frame: false,
+    // titleBarStyle: 'hidden',
+    // titleBarStyle: 'customButtonsOnHover',
+    // titleBarOverlay: {
+    //   color: "#2E2E2E",
+    //   symbolColor: "#FFFFFF",
+    //   height: 30
+    // },
+    // autoHideMenuBar: true,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.cjs')
+    }
     // icon: __dirname+'/assets/icon_5x.png'
   });
+
+  nativeTheme.themeSource = 'dark'
 
   console.log(__dirname+'/assets/icon_5x.png')
 

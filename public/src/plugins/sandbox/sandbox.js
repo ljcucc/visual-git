@@ -1,9 +1,9 @@
-import { WebContainer } from '@webcontainer/api';
+// import { WebContainer } from '@webcontainer/api';
 
-export default class Sandbox {
-  container;
+// export default class Sandbox {
+//   container;
 
-  async init() {
-    this.container = await WebContainer.boot();
-  }
-}
+//   async init() {
+//     this.container = await WebContainer.boot();
+//   }
+// }

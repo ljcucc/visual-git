@@ -1,21 +1,23 @@
 <template>
   <div class="trow">
     <div class="btn">
-      <button v-on:click="$emit('open-git')" class="material-symbols-rounded">construction</button>
+      <button v-on:click="update" class="material-symbols-rounded">construction</button>
       <label for="">tools</label>
     </div>
   </div>
 </template>
 
 <style scoped>
-.trow{
+.trow {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  overflow:visible;
+  overflow: visible;
   margin-top: -12px;
+  /* margin-top: -6px; */
   gap: 40px;
 }
+
 .btn {
   z-index: 10000;
   display: flex;
@@ -63,4 +65,17 @@ button:hover {
 </style>
 
 <script>
+export default {
+  props: ["enable"],
+  emit: ['update:enable'],
+  data() {
+    return {
+    };
+  },
+  methods: {
+    update() {
+      this.$emit('update:enable', !this.enable);
+    }
+  }
+}
 </script>

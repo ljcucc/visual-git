@@ -2,14 +2,14 @@
   <div id="env">
     <ProjectTitle style="margin-bottom: 16px;" title="Console" subtitle="Virtual environment will run inside browser">
     </ProjectTitle>
-    <div class="output">
-      <div v-for="log in logs">{{ log }}</div>
+    <div class="outline">
+      <div class="output">
+        <div v-for="log in reLogs">{{ log }}</div>
+      </div>
     </div>
     <input type="text" class="cmd">
   </div>
 </template>
-
-<style lang="scss"></style>
 
 <style lang="scss" scoped>
 #env {
@@ -34,34 +34,47 @@
   // height: 100%;
 }
 
+.outline {
+  border-radius: 14px 14px 8px 8px;
+  overflow: hidden;
+  height: 100%;
+  box-sizing: border-box;
+  flex: 1;
+}
 
 .output {
   height: 100%;
   box-sizing: border-box;
   flex: 1;
   background: rgba(0, 0, 0, .8);
-  border-radius: 14px 14px 8px 8px;
   padding: 16px;
 
   display: flex;
-  flex-direction: column;
-  overflow: auto;
+  flex-direction: column-reverse;
+  overflow-y: auto;
+  overflow-x: hidden;
 
-  &::-webkit-scrollbar-track {
-    /* background: transparent;  */
+  scrollbar-color: rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35);
+
+  &::-webkit-scrollbar {
+    display: none;
   }
+}
 
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0);
-  }
+.output::-webkit-scrollbar-trackk {
+  /* background: transparent;  */
+  background: rgba(255, 255, 255, 0) !important;
+}
 
-  /* Handle on hover */
-  &:hover::-webkit-scrollbar-thumb,
-  &::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
+// /* Handle */
+.output::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0) !important;
+}
 
+// /* Handle on hover */
+.output:hover::-webkit-scrollbar-thumb,
+.output::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
 }
 
 
@@ -98,68 +111,39 @@
 </style>
 
 <script>
-import { WebContainer } from '@webcontainer/api';
 import ProjectTitle from '../../components/ProjectTitle.vue';
 import { files } from './Sandbox';
 
 export default {
   async created() {
     const { print } = this;
-    print("booting...");
-    await this.$sandbox.init();
-    print("mounting files...");
-    await this.$sandbox.container.mount(files);
+    // print("booting...");
+    // await this.$sandbox.init();
+    // print("mounting files...");
+    // await this.$sandbox.container.mount(files);
 
     print("");
     for (var i = 0; i < 100; i++)
       print("done.");
   },
   async mounted() {
+    this.print(
+      "Waiting for sandbox boot..."
+    )
   },
   methods: {
     print(msg) {
       this.logs.push(msg || " ");
+      this.reLogs = this.logs.reverse();
     },
   },
   data() {
     return {
       terminal: null,
-      logs: [
-        "Waiting for sandbox boot..."
-      ]
+      logs: [],
+      reLogs: ["hi"]
     };
   },
   components: { ProjectTitle }
 }
-
-async function installDependencies(terminal, sandbox) {
-  // Install dependencies
-  const installProcess = await sandbox.spawn('jsh', ['']);
-  // const installProcess = await sandbox.spawn('npm', ['install']);
-  installProcess.output.pipeTo(new WritableStream({
-    write(data) {
-      terminal.write(data);
-    }
-  }))
-  // Wait for install command to exit
-  return installProcess.exit;
-}
-
-async function startShell(terminal, sandbox) {
-  const shellProcess = await sandbox.spawn('jsh');
-  shellProcess.output.pipeTo(
-    new WritableStream({
-      write(data) {
-        terminal.write(data);
-      },
-    })
-  );
-
-  const input = shellProcess.input.getWriter();
-  terminal.onData((data) => {
-    input.write(data);
-  });
-
-  return shellProcess;
-};
 </script>

@@ -1,12 +1,15 @@
 <template>
   <div id="finder-page">
 
-    <GitBtns v-on:open-git="enableGit = true; cardFocus = false"></GitBtns>
+    <GitBtns v-on:open-git="onGitBtn"></GitBtns>
 
     <ProjectTitle v-on:wheel="onWheel" title="$ (no workspace is open)"
       subtitle="Please open your workspace at home page"></ProjectTitle>
 
     <div class="layout">
+
+      <!-- <div class="card" style="flex:0.5">hi</div> -->
+
       <div id="left">
         <div class="stage" v-bind:class="{ close: cardFocus }" v-on:wheel="onWheel">
           <div id="left">
@@ -14,12 +17,14 @@
           </div>
           <div id="right"></div>
         </div>
-
         <!-- <TabsBar></TabsBar> -->
 
-        <FolderCard v-on:wheel="onCardWheel" v-bind:focus="cardFocus" ref="fcard">
-          <FinderFiles></FinderFiles>
-        </FolderCard>
+        <div class="row">
+          <FolderCard v-on:wheel="onCardWheel" v-bind:focus="cardFocus" ref="fcard">
+            <FinderFiles></FinderFiles>
+          </FolderCard>
+        </div>
+
       </div>
 
       <GitSideBtns v-on:wheel="onWheel" v-bind:enable="enableGit" v-on:card-fullscreen="fullscreenCard"
@@ -29,7 +34,7 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 #finder-page {
   display: flex;
   flex-direction: column;
@@ -54,6 +59,10 @@
   flex-direction: row;
   gap: 32px;
   transition: all 0.35s;
+
+  &:not(.close){
+    margin-top: 16px;
+  }
 }
 
 #finder-page .stage>* {
@@ -95,6 +104,26 @@
   flex: 1;
   box-sizing: border-box;
   /* overflow:hidden; */
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  flex: 1;
+  gap: 32px;
+}
+
+.card{
+  box-sizing: border-box;
+  border-radius: 14px;
+  color: black;
+  background-color: white;
+  // flex: 1;
+  padding: 16px;
+
+    margin-top: 16px;
+    margin-bottom: 32px;
 }
 </style>
 
@@ -172,6 +201,11 @@ export default {
       this.cardFocus = true;
       await new Promise(e => setTimeout(e, 200));
       this.enableGit = false;
+    },
+    async onGitBtn() {
+      if (this.enableGit)
+        this.fullscreenCard()
+      else { this.enableGit = true; this.cardFocus = false }
     }
   },
   components: { FolderCard, GitSideBtns, GitBtns, ProjectTitle, TabsBar, FinderFiles }

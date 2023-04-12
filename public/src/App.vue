@@ -8,7 +8,7 @@
     <div class="app-layout" :style="{ '--bg': color }">
       <Sidebar ref="sb" v-model:index="index" :max-index="3"></Sidebar>
       <div id="pages">
-        <div class="page-switcher" v-bind:style="{ marginTop: index * 100 * -1 + 'vh' }"></div>
+        <div class="page-switcher" v-bind:style="{ marginTop: `calc(${index*-1} * var(--full-height))`  }"></div>
         <WelcomePage></WelcomePage>
         <FinderPage ></FinderPage>
         <EditorPage></EditorPage>
@@ -36,6 +36,7 @@
 .page-switcher {
   transition-timing-function: cubic-bezier(0, 1, 0, 1) !important;
   transition: margin 0.5s;
+  /* transition: margin 0.5s; */
 }
 
 #pages {
@@ -45,7 +46,7 @@
 
 .app-layout {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: var(--bg);
   color: white;
   box-sizing: border-box;

@@ -4,15 +4,16 @@
       <ToolBtns></ToolBtns>
     </TabsBar> -->
     <div class="bar">
-      <ProjectTitle class="title" title="Editor" subtitle="code editor"></ProjectTitle>
-      <ToolBtns></ToolBtns>
+      <ProjectTitle class="title" title="Editor" :subtitle="curTabIndex"></ProjectTitle>
+      <ToolBtns v-model:enable="toolbarOn"></ToolBtns>
     </div>
     <div class="row">
-      <TabsList @select="onTabSel"></TabsList>
+      <div class="col">
+        <TabsList v-model:sel="curTabIndex" style="flex: 1;"></TabsList>
+        <EditingInfoWidget></EditingInfoWidget>
+      </div>
       <CodeEditorWidget class="code-mirror"></CodeEditorWidget>
-      <ToolsSideBar></ToolsSideBar>        
-      <!-- <FolderCard ref="fc" class="folder-card" v-bind:focus="showFC">
-      </FolderCard> -->
+      <ToolsSideBar :enable="toolbarOn"></ToolsSideBar>
     </div>
   </div>
 </template>
@@ -20,8 +21,9 @@
 <style scoped>
 .folder-card {
   /* --card-bg: #424242; */
-  --card-bg: #657484;
+  /* --card-bg: #657484; */
   margin-top: -16px;
+  margin-bottom: -32px;
 }
 
 .code-mirror {
@@ -59,6 +61,13 @@
   flex: 1;
 }
 
+.col{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .bar {
   display: flex;
   flex-direction: row;
@@ -74,6 +83,7 @@
 import ProjectTitle from '../../components/ProjectTitle.vue';
 import FolderCard from '../files/FolderCard.vue';
 import CodeEditorWidget from './CodeEditor.Widget.vue';
+import EditingInfoWidget from './EditingInfo.Widget.vue';
 import TabsBar from './TabsBar.vue';
 import TabsList from './TabsList.vue';
 import ToolBtns from './ToolBtns.vue';
@@ -82,20 +92,16 @@ import ToolsSideBar from './ToolsSideBar.vue';
 export default {
   data() {
     return {
-      showFC: true
+      showFC: true,
+      toolbarOn: false,
+      curTabIndex: 0,
     };
   },
   async mounted() {
+    // this.showFC = false;
   },
   methods: {
-    async onTabSel() {
-      console.log("show select");
-      this.showFC = false;
-      await new Promise(e => setTimeout(e, 200));
-      console.log("forward");
-      await this.$refs.fc.forward();
-      await new Promise(e => setTimeout(e, 100));
-      this.showFC = true;
+    async onTabSel(type) {
     }
   },
   components: {
@@ -105,7 +111,14 @@ export default {
     CodeEditorWidget,
     TabsList,
     FolderCard,
-    ToolsSideBar
-}
+    ToolsSideBar,
+    EditingInfoWidget
+},
+  watch: {
+    curTabIndex(newVal, oldVal) {
+      console.log("change")
+      this.onTabSel(newVal > oldVal ? "forward" : "back")
+    }
+  }
 }
 </script>

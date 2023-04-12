@@ -53,7 +53,7 @@
   width: 75px;
   background: rgba(0,0,0,0.5);
   opacity: 0.5;
-  border-radius: 0 14px 0 0;
+  border-radius: 4px 24px 4px 4px;
   transition: opacity 0.15s;
 }
 </style>

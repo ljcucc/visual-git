@@ -1,8 +1,8 @@
 <template>
   <div class="tabs">
-    <div class="label" v-for="name in files" @click="$emit('select')">
+    <div class="label" v-for="(title,index) in files" @click="onSel(index)">
       <span class="title">
-      {{ name }} 
+      {{ title }}
       </span>
       <button class="close material-symbols-rounded">close</button>
     </div>
@@ -105,6 +105,8 @@
 
 <script>
 export default {
+  props:["sel"],
+  emits:["update:sel", "select"],
   data() {
     return {
       files: [
@@ -112,7 +114,14 @@ export default {
         "index.js",
         "index.js",
         "index.js",
-      ]
+      ],
+    }
+  },
+  methods:{
+    onSel(index){
+      // this.$emit('select');
+      this.$emit('update:sel', index);
+      console.log(index);
     }
   }
 }
