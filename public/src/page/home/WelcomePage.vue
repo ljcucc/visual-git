@@ -37,7 +37,7 @@
 </style>
 
 <script>
-import DragOpenWidget from './DragOpen.Widget.vue';
+import DragOpenWidget from '../files/DragOpen.Widget.vue';
 
 export default {
   data() {

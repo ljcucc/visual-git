@@ -21,7 +21,7 @@
 
         <div class="row">
           <FolderCard v-on:wheel="onCardWheel" v-bind:focus="cardFocus" ref="fcard">
-            <FinderFiles></FinderFiles>
+            <FilesWidget></FilesWidget>
           </FolderCard>
         </div>
 
@@ -132,7 +132,8 @@ import FolderCard from "./FolderCard.vue";
 import GitSideBtns from "./GitSideBtns.vue";
 import GitBtns from "./GitBtn.vue";
 import ProjectTitle from "../../components/ProjectTitle.vue";
-import FinderFiles from "./FinderFiles.vue";
+import FinderFiles from "./Files.Widget.vue";
+import FilesWidget from "./Files.Widget.vue";
 
 export default {
   data() {
@@ -142,9 +143,6 @@ export default {
       cardFocus: true,
       enableGit: false,
       stageEnable: false
-      // forceFocus: false,
-      // forceUnfocus: false,
-      // cardFullscreen: false
     };
   },
   methods: {
@@ -207,6 +205,6 @@ export default {
       else { this.enableGit = true; this.cardFocus = false }
     }
   },
-  components: { FolderCard, GitSideBtns, GitBtns, ProjectTitle, FinderFiles }
+  components: { FolderCard, GitSideBtns, GitBtns, ProjectTitle, FilesWidget }
 };
 </script>

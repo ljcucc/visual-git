@@ -10,7 +10,7 @@
       <div id="pages">
         <div class="page-switcher" v-bind:style="{ marginTop: `calc(${index*-1} * var(--full-height))`  }"></div>
         <FinderPage ></FinderPage>
-        <EnvPage></EnvPage>
+        <SettingsPage></SettingsPage>
       </div>
     </div>
   </KeyboardShortcut>
@@ -61,8 +61,7 @@
 import Sidebar from './components/Sidebar.vue';
 
 import FinderPage from './page/files/Files.Page.vue';
-import WelcomePage from './page/home/WelcomePage.vue';
-import EnvPage from './page/env/Env.Page.vue';
+import SettingsPage from './page/settings/Settings.Page.vue';
 import KeyboardShortcut from './components/KeyboardShortcut.vue';
 
 
@@ -96,6 +95,6 @@ export default {
       this.updateColor(newVal)
     }
   },
-  components: { FinderPage, Sidebar, WelcomePage,  EnvPage, KeyboardShortcut }
+  components: { FinderPage, Sidebar, SettingsPage, KeyboardShortcut }
 };
 </script>

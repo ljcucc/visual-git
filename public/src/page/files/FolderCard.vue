@@ -1,3 +1,20 @@
+<!--
+
+Animation explained:
+  animatedBackword:0, animatedForward:false  is for static state, showing card but not moving.
+
+Forward animation:
+  false -> animatedForward:true              one way transition, class (none) -> .move, AKA m -> ma, o -> oa
+                                             after animation animatedForward should set to false without transition
+
+Backward animation:
+  0 -> animatedBackword: 1                   is for animation .moved , no animation transition, set o, m -> oa, ma
+  1 -> 2                                     is for animation .before-moved transition will start from .before-move to move to perform backward transition.  oa -> o, ma -> m
+  2 -> 0                                     after animation, perform animated o,m -> transition-less o,m 
+
+-->
+
+
 <template>
   <div class="cards" v-bind:class="{ unfocus: !forceFocus }">
     <div v-on:click="forward" style="--m:3; --ma:2; --o: 0; --oa: 0.5;" class="card"
@@ -94,7 +111,7 @@
 </style>
 
 <script>
-import FinderFiles from './FinderFiles.vue';
+import FinderFiles from './Files.Widget.vue';
 
 export default {
   props: {
@@ -130,13 +147,6 @@ export default {
       this.animatedBackword = 0;
     },
     async toggleFocus() {
-      // this.forceFocus = !this.forceFocus;
-      // console.log("focus");
-      // if(!this.forceFocus){
-      //   this.forceUnfocus = true;
-      //   await new Promise(e => setTimeout(e, 450));
-      //   this.forceUnfocus = false;
-      // }
     },
   },
   watch: {

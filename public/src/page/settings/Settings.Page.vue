@@ -1,13 +1,11 @@
 <template>
   <div id="env">
-    <ProjectTitle style="margin-bottom: 16px;" title="Console" subtitle="Virtual environment will run inside browser">
+    <ProjectTitle style="margin-bottom: 16px;" title="Settings" subtitle="Hello World">
     </ProjectTitle>
     <div class="outline">
       <div class="output">
-        <div v-for="log in reLogs">{{ log }}</div>
       </div>
     </div>
-    <input type="text" class="cmd">
   </div>
 </template>
 
@@ -35,7 +33,8 @@
 }
 
 .outline {
-  border-radius: 14px 14px 8px 8px;
+  // border-radius: 14px 14px 8px 8px;
+  border-radius: 14px;
   overflow: hidden;
   height: 100%;
   box-sizing: border-box;
@@ -112,36 +111,16 @@
 
 <script>
 import ProjectTitle from '../../components/ProjectTitle.vue';
-import { files } from './Sandbox';
 
 export default {
   async created() {
-    const { print } = this;
-    // print("booting...");
-    // await this.$sandbox.init();
-    // print("mounting files...");
-    // await this.$sandbox.container.mount(files);
-
-    print("");
-    for (var i = 0; i < 100; i++)
-      print("done.");
   },
   async mounted() {
-    this.print(
-      "Waiting for sandbox boot..."
-    )
   },
   methods: {
-    print(msg) {
-      this.logs.push(msg || " ");
-      this.reLogs = this.logs.reverse();
-    },
   },
   data() {
     return {
-      terminal: null,
-      logs: [],
-      reLogs: ["hi"]
     };
   },
   components: { ProjectTitle }
