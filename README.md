@@ -1,3 +1,3 @@
 # Visual Git
 
-A simplified editor.
+A visualize git tool. still WIP.

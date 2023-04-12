@@ -3,7 +3,7 @@
     <div v-if="enable" class="btns-container">
       <div class="btns">
 
-        <button v-on:click="" class="material-symbols-rounded">
+        <!-- <button v-on:click="" class="material-symbols-rounded">
           <img src="../../../icons/alt_route_white_24dp.svg" alt="" srcset="">
         </button>
         <label for="">branch</label>
@@ -11,7 +11,7 @@
         <button v-on:click="" class="material-symbols-rounded">
           <img src="../../../icons/schema_white_24dp.svg" alt="" srcset="">
         </button>
-        <label for="">commits</label>
+        <label for="">commits</label> -->
 
         <button v-on:click="$emit('card-backward')" class="material-symbols-rounded">
           <img src="../../../icons/vertical_align_bottom_white_24dp.svg" alt="" srcset="">
@@ -21,7 +21,7 @@
         <button v-on:click="$emit('card-focus')" class="material-symbols-rounded">
           <img src="../../../icons/inbox_white_24dp.svg" alt="" srcset="">
         </button>
-        <label for="">focus</label>
+        <label for="">stage</label>
 
         <!-- <button v-on:click="$emit('card-fullscreen')" class="material-symbols-rounded">
           <img src="../../../icons/cancel_white_24dp.svg" alt="" srcset="">

@@ -6,12 +6,10 @@
   @digit4="index=3"
   >
     <div class="app-layout" :style="{ '--bg': color }">
-      <Sidebar ref="sb" v-model:index="index" :max-index="3"></Sidebar>
+      <Sidebar ref="sb" v-model:index="index" :max-index="1"></Sidebar>
       <div id="pages">
         <div class="page-switcher" v-bind:style="{ marginTop: `calc(${index*-1} * var(--full-height))`  }"></div>
-        <WelcomePage></WelcomePage>
         <FinderPage ></FinderPage>
-        <EditorPage></EditorPage>
         <EnvPage></EnvPage>
       </div>
     </div>
@@ -64,7 +62,6 @@ import Sidebar from './components/Sidebar.vue';
 
 import FinderPage from './page/files/Files.Page.vue';
 import WelcomePage from './page/home/WelcomePage.vue';
-import EditorPage from './page/editor/Editor.Page.vue';
 import EnvPage from './page/env/Env.Page.vue';
 import KeyboardShortcut from './components/KeyboardShortcut.vue';
 
@@ -84,17 +81,10 @@ export default {
       console.log(newVal)
       switch (newVal) {
         case 0:
-          this.color = "#2E2E2E";
-          break;
-        case 1:
           this.color = "hsla(360, 5%, 23%, 1)";
           break;
-        case 2:
-          this.color = "hsla(211, 5%, 23%, 1)";
-          // this.color = "hsla(211, 12%, 23%, 1)";
-          break;
-        case 3:
-          this.color = "hsla(168, 5%, 23%, 1)";
+        case 1:
+          this.color = "#2E2E2E";
           break;
         default:
           this.color = "auto";
@@ -106,6 +96,6 @@ export default {
       this.updateColor(newVal)
     }
   },
-  components: { FinderPage, Sidebar, WelcomePage, EditorPage, EnvPage, KeyboardShortcut }
+  components: { FinderPage, Sidebar, WelcomePage,  EnvPage, KeyboardShortcut }
 };
 </script>

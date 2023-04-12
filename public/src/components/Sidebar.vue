@@ -1,20 +1,30 @@
 <template>
   <div id="sidebar" v-on:wheel="onWheel">
     <!-- <div style="flex: 1;"></div> -->
-    <button v-on:click="$emit('update:index', 0); index = 0" v-bind:class="{ sel: index == 0 }"
+    <!-- <button v-on:click="$emit('update:index', 0); index = 0" v-bind:class="{ sel: index == 0 }"
       class="material-symbols-rounded">
       <img src="../../icons/home_white_24dp.svg" alt="" srcset="">
     </button>
-    <label for="">projects</label>
+    <label for="">projects</label> -->
     <!-- <div style="flex: 1;"></div> -->
 
-    <button v-on:click="$emit('update:index', 1); index = 1" v-bind:class="{ sel: index == 1 }"
+    <button v-on:click="$emit('update:index', 0); index = 0" v-bind:class="{ sel: index == 0 }"
       class="material-symbols-rounded">
       <img src="../../icons/folder_white_24dp.svg" alt="" srcset="">
     </button>
     <label for="">files</label>
 
-    <button v-on:click="$emit('update:index', 2); index = 2" v-bind:class="{ sel: index == 2 }"
+    <button v-on:click="" class="material-symbols-rounded">
+      <img src="../../../icons/alt_route_white_24dp.svg" alt="" srcset="">
+    </button>
+    <label for="">branch</label>
+
+    <button v-on:click="" class="material-symbols-rounded">
+      <img src="../../../icons/schema_white_24dp.svg" alt="" srcset="">
+    </button>
+    <label for="">commits</label>
+
+    <!-- <button v-on:click="$emit('update:index', 2); index = 2" v-bind:class="{ sel: index == 2 }"
       class="material-symbols-rounded">
       <img src="../../icons/code_white_24dp.svg" alt="" srcset="">
     </button>
@@ -24,14 +34,15 @@
       class="material-symbols-rounded">
       <img src="../../icons/dashboard_white_24dp.svg" alt="" srcset="">
     </button>
-    <label for="">console</label>
+    <label for="">console</label> -->
 
     <!-- <button v-on:click="" class="material-symbols-rounded">grid_view</button>
     <label for="">tools</label> -->
 
     <div style="flex: 1;"></div>
 
-    <button v-on:click="$emit('open-git')" class="material-symbols-rounded">settings</button>
+    <button class="material-symbols-rounded" v-on:click="$emit('update:index', 1); index = 1"
+      v-bind:class="{ sel: index == 1 }">settings</button>
     <label for="">settings</label>
     <!-- <div style="flex: 1;"></div> -->
   </div>
@@ -69,7 +80,7 @@ button+label {
   // visibility: hidden;
 }
 
-button:hover+label{
+button:hover+label {
   // opacity: 1;
 }
 

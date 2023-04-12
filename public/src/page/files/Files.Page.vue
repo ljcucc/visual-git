@@ -132,7 +132,6 @@ import FolderCard from "./FolderCard.vue";
 import GitSideBtns from "./GitSideBtns.vue";
 import GitBtns from "./GitBtn.vue";
 import ProjectTitle from "../../components/ProjectTitle.vue";
-import TabsBar from "../editor/TabsBar.vue";
 import FinderFiles from "./FinderFiles.vue";
 
 export default {
@@ -150,7 +149,7 @@ export default {
   },
   methods: {
     async onCardWheel(e) {
-      this.onWheel(e, true);
+      // this.onWheel(e, true);
     },
     async onWheel(e, oncard) {
       e.preventDefault();
@@ -208,6 +207,6 @@ export default {
       else { this.enableGit = true; this.cardFocus = false }
     }
   },
-  components: { FolderCard, GitSideBtns, GitBtns, ProjectTitle, TabsBar, FinderFiles }
+  components: { FolderCard, GitSideBtns, GitBtns, ProjectTitle, FinderFiles }
 };
 </script>
